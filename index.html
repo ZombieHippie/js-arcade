@@ -10,7 +10,7 @@
 <button id="round-skip">Skip</button>
 <button id="round-run">Run</button>
 <br>
-<textarea id="round-editor" style="width: 700px; height: 300px"></textarea>
+<textarea id="round-editor" style="width: 500px; height: 300px"></textarea>
 <p id="round-description"></p>
 
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -24,12 +24,18 @@
 
   function GetNextChallenge () {
     $.get("/get-challenge", {}, function (challengeData) {
-      editorEl.val(challengeData.code)
-      titleEl.text(challengeData.title)
-      if (challengeData.instruction != null)
-        descEl.text(challengeData.instruction)
-      else
-        descEl.text("")
+
+      if (challengeData.gameover)
+        window.location.href = "/game-over"
+
+      else {
+        editorEl.val(challengeData.code)
+        titleEl.text(challengeData.title)
+        if (challengeData.instruction != null)
+          descEl.text(challengeData.instruction)
+        else
+          descEl.text("")
+      }
     })
   }
 

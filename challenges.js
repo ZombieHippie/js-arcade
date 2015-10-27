@@ -53,11 +53,12 @@ var db = [
 ]
 
 function getTestsById (cId) {
-  console.log("getTestsById", cId)
-  return db[cId - 1].tests
+  var challenge = db[cId - 1]
+  return challenge != null ? challenge.tests : null
 }
 function getChallengeDataById (cId) {
-  return db[cId - 1].data
+  var challenge = db[cId - 1]
+  return challenge != null ? challenge.data : null
 }
 
 exports.getChallengeDataById = getChallengeDataById
