@@ -10,6 +10,7 @@
 ## Testing
 
 Run the server using `node server.js`
+Then, go to http://localhost:3000 to view the program.
 
 > Once you've made changes to the server.js file, or other server-side javascript, you need to:
 
