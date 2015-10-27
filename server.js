@@ -81,7 +81,7 @@ app.post('/game-over', function (req, res) {
     || req.session.currentGame.isGameOver == false
     || req.body.username == null
     || req.session.currentGame.time == null)
-    res.error("could not save highscore")
+    res.status(400).send("could not save highscore")
 
   else {
     highscores.push({ name: req.body.username.slice(0,15), time: req.session.currentGame.time})
@@ -101,7 +101,7 @@ var challenges = require('./challenges.js')
 app.get('/get-challenge', function (req, res) {
   var sess = req.session
   if (sess.currentGame == null)
-    res.error("Session is without game started. Please start a game at /start-game")
+    res.status(400).send("Session is without game started. Please start a game at /start-game")
 
   else {
     // send current challenge
@@ -121,7 +121,7 @@ app.get('/get-challenge', function (req, res) {
 app.post('/test-code', function (req, res) {
   var sess = req.session
   if (sess.currentGame == null) {
-    res.error("Session is without game started. Please start a game at /start-game")
+    res.status(400).send("Session is without game started. Please start a game at /start-game")
     return
   }
   var sessGame = req.session.currentGame
@@ -142,7 +142,7 @@ app.post('/test-code', function (req, res) {
   var testResultPairs = challenges.getTestsById(challengeId)
 
   if (testResultPairs == null)
-    return res.error("invalid challenge id")
+    return res.status(400).send("invalid challenge id")
 
   try {
     vm.runInThisContext(reqData.code, sandbox)
