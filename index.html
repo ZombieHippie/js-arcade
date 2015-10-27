@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Arcade</title>
+</head>
+<body>
+
+<h1>Arcade</h1>
+<h2 id="round-title"></h2>
+<button id="round-skip">Skip</button>
+<button id="round-run">Run</button>
+<br>
+<textarea id="round-editor" style="width: 700px; height: 300px"></textarea>
+<p id="round-description"></p>
+
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+  var runEl = $("#round-run")
+  var editorEl = $("#round-editor")
+  var titleEl = $("#round-title")
+  var descEl = $("#round-description")
+
+  runEl.on("click", TestCode)
+
+  function GetNextChallenge () {
+    $.get("/get-challenge", {}, function (challengeData) {
+      editorEl.val(challengeData.code)
+      titleEl.text(challengeData.title)
+      if (challengeData.instruction != null)
+        descEl.text(challengeData.instruction)
+      else
+        descEl.text("")
+    })
+  }
+
+  function TestCode () {
+    var usersCode = editorEl.val()
+    var sendData = {
+      code: usersCode,
+    }
+    $.post("/test-code", sendData, function (data) {
+      console.log("test-code result", data.correct)
+      if (data.error)
+        console.error(data.error)
+
+      if (data.correct) {
+        console.log("success!")
+        // get new challenge
+        GetNextChallenge()
+      } else {
+        console.log("EXPECTED:", data.test, data.expected)
+      }
+    })
+  }
+
+  // init
+  GetNextChallenge()
+
+</script>
+</body>
+</html>
