@@ -6,8 +6,13 @@ var fs = require('fs')
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
+ 
 var session = require('express-session')
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+var FileStore = require('session-file-store')(session);
+app.use(session({
+    store: new FileStore(),
+    secret: 'keyboard cat'
+}));
 
 console.log("dirname", __dirname)
 
