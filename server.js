@@ -14,8 +14,6 @@ app.use(session({
     secret: 'keyboard cat'
 }));
 
-console.log("dirname", __dirname)
-
 var highscores = []
 
 // access localhost:3000

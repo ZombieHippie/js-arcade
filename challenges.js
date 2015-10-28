@@ -31,23 +31,23 @@ var db = [
   },
   {
     data: {
-      title: "Fizzbuzz!",
+      title: "Fizz, buzz, or fizzbuzz?",
       instruction: "If n is divisible by 3, return \"fizz\" " +
         "if n is divisible by 5 return \"buzz\", " + 
         "if n is divisible by both 3 and 5 return \"fizzbuzz\", " +
-        "else return null.",
-      code: "function Fizzbuzz(n) {\n" +
+        "else return empty string \"\".",
+      code: "function FizzBuzzOrFizzbuzz(n) {\n" +
         "  return \"fizzbuzz\";\n" +
         "}"
     },
     tests: [
-      ["Fizzbuzz(1)", null],
-      ["Fizzbuzz(3)", "fizz"],
-      ["Fizzbuzz(5)", "buzz"],
-      ["Fizzbuzz(7)", null],
-      ["Fizzbuzz(9)", "fizz"],
-      ["Fizzbuzz(12)", "fizz"],
-      ["Fizzbuzz(15)", "fizzbuzz"]
+      ["FizzBuzzOrFizzbuzz(1)", ""],
+      ["FizzBuzzOrFizzbuzz(3)", "fizz"],
+      ["FizzBuzzOrFizzbuzz(5)", "buzz"],
+      ["FizzBuzzOrFizzbuzz(7)", ""],
+      ["FizzBuzzOrFizzbuzz(9)", "fizz"],
+      ["FizzBuzzOrFizzbuzz(12)", "fizz"],
+      ["FizzBuzzOrFizzbuzz(15)", "fizzbuzz"]
     ]
   }
 ]
